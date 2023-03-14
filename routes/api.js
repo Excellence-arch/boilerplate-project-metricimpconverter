@@ -19,12 +19,16 @@ module.exports = function (app) {
       returnNum,
       returnUnit
     );
-    res.send({
-      initNum,
-      initUnit,
-      returnNum,
-      returnUnit,
-      string,
-    });
+    if (!initUnit || !initNum) {
+      res.send(`${string}`);
+    } else {
+      res.send({
+        initNum,
+        initUnit,
+        returnNum,
+        returnUnit,
+        string,
+      });
+    }
   });
 };

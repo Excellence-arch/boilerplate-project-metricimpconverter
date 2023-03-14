@@ -116,7 +116,9 @@ function ConvertHandler() {
   };
 
   this.getString = async function (initNum, initUnit, returnNum, returnUnit) {
-    if (!initUnit || !initNum) return `Invalid input`;
+    if (!initUnit && !initNum) return `invalid number and unit`;
+    else if (!initNum) return `invalid number`;
+    else if (!initUnit) return `invalid unit`;
     let spellOutReturnUnit = await this.spellOutUnit(returnUnit);
     return `${initNum} ${initUnit} converts to ${returnNum} ${spellOutReturnUnit}`;
   };
