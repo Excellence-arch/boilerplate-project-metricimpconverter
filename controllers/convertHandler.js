@@ -74,7 +74,8 @@ function ConvertHandler() {
   };
 
   this.spellOutUnit = function (unit) {
-    switch (unit) {
+    let nunit = unit && unit.toLowerCase();
+    switch (nunit) {
       case "km":
         return "kilometers";
       case "gal":
@@ -99,17 +100,17 @@ function ConvertHandler() {
     let unit = initUnit && initUnit.toLowerCase();
     switch (unit) {
       case "mi":
-        return initNum * miToKm;
+        return (initNum * miToKm).toFixed(5);
       case "gal":
-        return initNum * galToL;
+        return (initNum * galToL).toFixed(5);
       case "lbs":
-        return initNum * lbsToKg;
+        return (initNum * lbsToKg).toFixed(5);
       case "km":
-        return initNum / miToKm;
+        return (initNum / miToKm).toFixed(5);
       case "l":
-        return initNum / galToL;
+        return (initNum / galToL).toFixed(5);
       case "kg":
-        return initNum / lbsToKg;
+        return (initNum / lbsToKg).toFixed(5);
       default:
         return undefined;
     }
@@ -120,7 +121,8 @@ function ConvertHandler() {
     else if (!initNum) return `invalid number`;
     else if (!initUnit) return `invalid unit`;
     let spellOutReturnUnit = await this.spellOutUnit(returnUnit);
-    return `${initNum} ${initUnit} converts to ${returnNum} ${spellOutReturnUnit}`;
+    let spellOutInitUnit = await this.spellOutUnit(initUnit);
+    return `${initNum} ${spellOutInitUnit} converts to ${returnNum} ${spellOutReturnUnit}`;
   };
 }
 
